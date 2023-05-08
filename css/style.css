@@ -1,0 +1,92 @@
+@import url(./color.css);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  background-color: var(--Off-white);
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content {
+  padding-block: 60px;
+  padding-inline: 40px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 30px;
+  border-bottom-right-radius: 200px;
+}
+
+.container-cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card-date {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-transform: uppercase;
+  color: var(--Smokey-grey);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+input[type="text"]:focus {
+  border: 2px solid var(--Purple);
+}
+
+.input {
+  height: 60px;
+  max-width: 120px;
+  padding-left: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  outline: none;
+  border: 2px solid var(--Light-grey);
+  border-radius: 8px;
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.btn-img {
+  position: relative;
+  background-color: black;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn-line {
+  width: 550px;
+  height: 1px;
+  background: var(--Light-grey);
+}
+
+.result-text {
+  font-size: 62px;
+}
+
+.result-text span {
+  color: var(--Purple);
+}
