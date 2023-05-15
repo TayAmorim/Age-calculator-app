@@ -6,6 +6,7 @@ const resultMonth = document.querySelector('[data-result="month"]');
 const resulDays = document.querySelector('[data-result="days"]');
 const cardsDateText = document.querySelectorAll(".card-date-text");
 
+const valueImput = [];
 let day = 0;
 let month = 0;
 let year = 0;
@@ -20,26 +21,33 @@ btn.addEventListener("click", validateinputs);
 function validateinputs() {
   for (let i = 0; i < inputs.length; i++) {
     const input = inputs[i];
+    const inputValue = input.value;
     const cardText = cardsDateText[i];
     const nameInput = input.dataset.input;
     const span = document.createElement("span");
-    if (input.value === "" && !visibleMessage[`${nameInput}`]) {
+    span.className = `${input.dataset.input}`;
+    if (inputValue === "" && !visibleMessage[`${nameInput}`]) {
       input.classList.add("erro");
       cardText.classList.add("erro");
       input.after(span);
       span.innerText = "Esse campo é requerido.";
-      span.className = `${input.dataset.input}`;
+
       visibleMessage[`${nameInput}`] = true;
     }
-    if (input.value !== "") {
+    if (inputValue && visibleMessage[`${nameInput}`]) {
       const elementDelet = document.querySelector(`.${input.dataset.input}`);
       input.classList.remove("erro");
       cardText.classList.remove("erro");
       elementDelet.innerHTML = "";
       visibleMessage[`${nameInput}`] = false;
     }
+    if (inputValue) {
+      valueImput.push(inputValue);
+    }
   }
-  inputs.forEach((input) => {});
+  day = valueImput[0];
+  month = valueImput[1];
+  year = valueImput[2];
 }
 
 /* function calculateAge() {
