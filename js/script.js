@@ -9,25 +9,30 @@ const cardsDate = document.querySelectorAll(".card-date");
 let day = 0;
 let month = 0;
 let year = 0;
-let visibleMessage = false;
 
+const visibleMessage = {
+  day: false,
+  month: false,
+  year: false,
+};
 btn.addEventListener("click", validateinputs);
 
 function validateinputs() {
   inputs.forEach((input) => {
-    if (input.value === "" && !visibleMessage) {
-      const span = document.createElement("span");
+    const nameInput = input.dataset.input;
+    const span = document.createElement("span");
+    if (input.value === "" && !visibleMessage[`${nameInput}`]) {
       input.after(span);
       span.innerText = "Esse campo é requerido.";
       span.className = `${input.dataset.input}`;
+      visibleMessage[`${nameInput}`] = true;
     }
-    if (input.value !== "" && visibleMessage) {
+    if (input.value !== "") {
       const elementDelet = document.querySelector(`.${input.dataset.input}`);
       elementDelet.innerHTML = "";
+      visibleMessage[`${nameInput}`] = false;
     }
-    console.log(visibleMessage);
   });
-  visibleMessage = true;
 }
 
 /* function calculateAge() {
