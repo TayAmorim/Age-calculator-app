@@ -10,7 +10,21 @@ let day = 0;
 let month = 0;
 let year = 0;
 
-const months = [undefined, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const calendarMonths = [
+  undefined,
+  31,
+  28,
+  31,
+  30,
+  31,
+  30,
+  31,
+  31,
+  30,
+  31,
+  30,
+  31,
+];
 
 const visibleMessage = {
   day: false,
@@ -65,12 +79,12 @@ function validateEmptyField() {
 function validateDate() {
   if (month >= 1 && month <= 9) {
     let monthClear = month.toString().replace("0", "");
-    const monthDay = months[`${+monthClear}`];
+    const monthDay = calendarMonths[`${+monthClear}`];
     if (day > monthDay) {
       console.log("data errada");
     }
   } else if (month >= 10 && month <= 12) {
-    const monthDay = months[`${+month}`];
+    const monthDay = calendarMonths[`${+month}`];
     if (day > monthDay) {
       console.log("data errada");
     }
