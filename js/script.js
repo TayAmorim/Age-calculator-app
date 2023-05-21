@@ -1,12 +1,18 @@
 const inputs = document.querySelectorAll("[data-input]");
 
 const btn = document.querySelector(".btn-img");
-const resultYears = document.querySelector('[data-result="year"]');
-const resultMonth = document.querySelector('[data-result="month"]');
-const resulDays = document.querySelector('[data-result="days"]');
+
 const cardsDateText = document.querySelectorAll(".card-date-text");
 const containerCards = document.querySelector(".container-cards");
 const spanErro = document.createElement("span");
+
+const yearActual = new Date().getFullYear();
+const monthActual = new Date().getMonth() + 1;
+const dayActual = new Date().getDate();
+
+const resultYears = document.querySelector('[data-result="year"]');
+const resultMonth = document.querySelector('[data-result="months"]');
+const resulDays = document.querySelector('[data-result="days"]');
 
 let day = 0;
 let month = 0;
@@ -80,7 +86,6 @@ function validateEmptyField() {
 }
 
 function validateDate() {
-  const yearActual = new Date().getFullYear();
   const inputDay = document.querySelector('[data-input="day"]');
   const inputMonth = document.querySelector('[data-input="month"]');
   const inputyear = document.querySelector('[data-input="year"]');
@@ -106,9 +111,20 @@ function validateDate() {
     inputyear.after(spanErro);
     spanErro.innerText = "Ano inválido";
   }
+  calculateAge();
 }
 
-/* function calculateAge() {
-  const age = new Date().getFullYear() - year;
+function calculateAge() {
+  let age = yearActual - year;
+  let ageMonths = Math.abs(month - 12) + monthActual;
+  let ageYears;
+  if (month > monthActual) {
+    age = yearActual - year - 1;
+  }
   resultYears.innerText = age;
-} */
+  if (day < dayActual) {
+    resultMonth.innerText = ageMonths;
+    ageYears = Math.abs(day - dayActual);
+  }
+  resulDays.innerText = ageYears;
+}
