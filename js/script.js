@@ -5,6 +5,8 @@ const resultYears = document.querySelector('[data-result="year"]');
 const resultMonth = document.querySelector('[data-result="month"]');
 const resulDays = document.querySelector('[data-result="days"]');
 const cardsDateText = document.querySelectorAll(".card-date-text");
+const containerCards = document.querySelector(".container-cards");
+const spanErro = document.createElement("span");
 
 let day = 0;
 let month = 0;
@@ -44,6 +46,7 @@ function validateEmptyField() {
     const nameInput = input.dataset.input;
     const span = document.createElement("span");
     span.className = `${input.dataset.input}`;
+
     if (inputValue === "" && !visibleMessage[`${nameInput}`]) {
       input.classList.add("erro");
       cardText.classList.add("erro");
@@ -77,17 +80,31 @@ function validateEmptyField() {
 }
 
 function validateDate() {
+  const yearActual = new Date().getFullYear();
+  const inputDay = document.querySelector('[data-input="day"]');
+  const inputMonth = document.querySelector('[data-input="month"]');
+  const inputyear = document.querySelector('[data-input="year"]');
+  spanErro.innerText = "";
   if (month >= 1 && month <= 9) {
     let monthClear = month.toString().replace("0", "");
     const monthDay = calendarMonths[`${+monthClear}`];
     if (day > monthDay) {
-      console.log("data errada");
+      inputDay.after(spanErro);
+      spanErro.innerText = "Dia errado";
     }
   } else if (month >= 10 && month <= 12) {
     const monthDay = calendarMonths[`${+month}`];
     if (day > monthDay) {
-      console.log("data errada");
+      inputDay.after(spanErro);
+      spanErro.innerText = "Dia inválido";
     }
+  } else {
+    inputMonth.after(spanErro);
+    spanErro.innerText = "mês  inválido";
+  }
+  if (year > yearActual) {
+    inputyear.after(spanErro);
+    spanErro.innerText = "Ano inválido";
   }
 }
 
