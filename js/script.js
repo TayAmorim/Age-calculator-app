@@ -30,7 +30,7 @@ const calendarMonths = [
   31,
   28,
   31,
-  30,
+  31,
   31,
   30,
   31,
@@ -123,7 +123,8 @@ function validateDate() {
 function calculateAge() {
   let age = yearActual - year;
   let ageMonths;
-  let ageYears;
+  let ageYears = Math.abs(day - dayActual);
+  const existAge = age || ageMonths || ageYears;
 
   if (month > monthActual) {
     ageMonths = Math.abs(month - 12) + monthActual;
@@ -137,6 +138,23 @@ function calculateAge() {
     if (day > dayActual) {
       ageMonths = Math.abs(month - 12) + monthActual - 1;
       ageYears = Math.abs(day - dayActual - monthDay);
+    }
+  }
+
+  if (month <= monthActual) {
+    ageMonths = Math.abs(month - monthActual);
+    if (day == dayActual) {
+      ageYears = 0;
+    }
+    if (day < dayActual) {
+      ageYears = Math.abs(day - dayActual);
+    }
+    if (day > dayActual) {
+      ageMonths = monthActual - month - 1;
+      ageYears = Math.abs(day - dayActual - monthDay);
+    }
+    if (ageMonths === undefined) {
+      ageMonths = 0;
     }
   }
 
