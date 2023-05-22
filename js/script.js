@@ -116,15 +116,32 @@ function validateDate() {
 
 function calculateAge() {
   let age = yearActual - year;
-  let ageMonths = Math.abs(month - 12) + monthActual;
+  let ageMonths;
   let ageYears;
+
   if (month > monthActual) {
+    ageMonths = Math.abs(month - 12) + monthActual;
     age = yearActual - year - 1;
+
+    if (day == dayActual) {
+      ageYears = 0;
+    }
+    if (day < dayActual) {
+      ageYears = Math.abs(day - dayActual);
+    }
+    if (day > dayActual) {
+      ageMonths = Math.abs(month - 12) + monthActual - 1;
+      if (month >= 1 && month <= 9) {
+        let monthClear = month.toString().replace("0", "");
+        ageYears = Math.abs(day - dayActual - calendarMonths[`${monthClear}`]);
+      }
+      if (month >= 10 && month <= 12) {
+        ageYears = Math.abs(day - dayActual - calendarMonths[`${month}`]);
+      }
+    }
   }
+
   resultYears.innerText = age;
-  if (day < dayActual) {
-    resultMonth.innerText = ageMonths;
-    ageYears = Math.abs(day - dayActual);
-  }
+  resultMonth.innerText = ageMonths;
   resulDays.innerText = ageYears;
 }
