@@ -107,15 +107,18 @@ function clearInputValue() {
 
 function validateDate() {
   spanErro.innerText = "";
-
+  resultYears.innerText = "--";
+  resultMonth.innerText = "--";
+  resulDays.innerText = "--";
   if (day > monthDay) {
     inputDay.after(spanErro);
     spanErro.innerText = "Dia errado";
+    return;
   }
-
   if (year > yearActual) {
     inputyear.after(spanErro);
     spanErro.innerText = "Ano inválido";
+    return;
   }
   calculateAge(monthDay);
 }
@@ -124,7 +127,6 @@ function calculateAge() {
   let age = yearActual - year;
   let ageMonths;
   let ageYears = Math.abs(day - dayActual);
-  const existAge = age || ageMonths || ageYears;
 
   if (month > monthActual) {
     ageMonths = Math.abs(month - 12) + monthActual;
