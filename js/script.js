@@ -49,6 +49,9 @@ const visibleMessage = {
 btn.addEventListener("click", validateEmptyField);
 
 function validateEmptyField() {
+  resultYears.innerText = "--";
+  resultMonth.innerText = "--";
+  resulDays.innerText = "--";
   day = 0;
   month = 0;
   year = 0;
@@ -95,11 +98,14 @@ function validateEmptyField() {
 function clearInputValue() {
   if (month >= 1 && month <= 9) {
     monthClear = month.toString().replace("0", "");
-  } else if (month >= 10 && month <= 12) {
+  }
+  if (month >= 10 && month <= 12) {
     monthClear = month;
-  } else {
+  }
+  if (month >= 13) {
     inputMonth.after(spanErro);
     spanErro.innerText = "mês  inválido";
+    return;
   }
   monthDay = calendarMonths[`${+monthClear}`];
   validateDate(monthDay);
@@ -124,6 +130,9 @@ function validateDate() {
 }
 
 function calculateAge() {
+  resultYears.innerText = "--";
+  resultMonth.innerText = "--";
+  resulDays.innerText = "--";
   let age = yearActual - year;
   let ageMonths;
   let ageYears = Math.abs(day - dayActual);
