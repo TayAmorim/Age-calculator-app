@@ -14,9 +14,16 @@ const resultYears = document.querySelector('[data-result="year"]');
 const resultMonth = document.querySelector('[data-result="months"]');
 const resulDays = document.querySelector('[data-result="days"]');
 
+const inputDay = document.querySelector('[data-input="day"]');
+const inputMonth = document.querySelector('[data-input="month"]');
+const inputyear = document.querySelector('[data-input="year"]');
+
 let day = 0;
 let month = 0;
 let year = 0;
+
+let monthClear;
+let monthDay;
 
 const calendarMonths = [
   undefined,
@@ -81,37 +88,36 @@ function validateEmptyField() {
     }
   }
   if (day && month && year) {
-    validateDate();
+    clearInputValue();
   }
 }
 
-function validateDate() {
-  const inputDay = document.querySelector('[data-input="day"]');
-  const inputMonth = document.querySelector('[data-input="month"]');
-  const inputyear = document.querySelector('[data-input="year"]');
-  spanErro.innerText = "";
+function clearInputValue() {
   if (month >= 1 && month <= 9) {
-    let monthClear = month.toString().replace("0", "");
-    const monthDay = calendarMonths[`${+monthClear}`];
-    if (day > monthDay) {
-      inputDay.after(spanErro);
-      spanErro.innerText = "Dia errado";
-    }
+    monthClear = month.toString().replace("0", "");
   } else if (month >= 10 && month <= 12) {
-    const monthDay = calendarMonths[`${+month}`];
-    if (day > monthDay) {
-      inputDay.after(spanErro);
-      spanErro.innerText = "Dia inválido";
-    }
+    monthClear = month;
   } else {
     inputMonth.after(spanErro);
     spanErro.innerText = "mês  inválido";
   }
+  monthDay = calendarMonths[`${+monthClear}`];
+  validateDate(monthDay);
+}
+
+function validateDate() {
+  spanErro.innerText = "";
+
+  if (day > monthDay) {
+    inputDay.after(spanErro);
+    spanErro.innerText = "Dia errado";
+  }
+
   if (year > yearActual) {
     inputyear.after(spanErro);
     spanErro.innerText = "Ano inválido";
   }
-  calculateAge();
+  calculateAge(monthDay);
 }
 
 function calculateAge() {
@@ -122,7 +128,6 @@ function calculateAge() {
   if (month > monthActual) {
     ageMonths = Math.abs(month - 12) + monthActual;
     age = yearActual - year - 1;
-
     if (day == dayActual) {
       ageYears = 0;
     }
@@ -131,13 +136,7 @@ function calculateAge() {
     }
     if (day > dayActual) {
       ageMonths = Math.abs(month - 12) + monthActual - 1;
-      if (month >= 1 && month <= 9) {
-        let monthClear = month.toString().replace("0", "");
-        ageYears = Math.abs(day - dayActual - calendarMonths[`${monthClear}`]);
-      }
-      if (month >= 10 && month <= 12) {
-        ageYears = Math.abs(day - dayActual - calendarMonths[`${month}`]);
-      }
+      ageYears = Math.abs(day - dayActual - monthDay);
     }
   }
 
