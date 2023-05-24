@@ -62,7 +62,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - Font-family: Poppins
 
-- Font-weight: 400 e 700
+- Font-weight: 400i, 700, 800i
 
 <a href="https://www.figma.com/file/EYimYoWWhNVjDZdc0zv1Vw/DD-Portfolio-Copy?fuid=1100112420700070907">
   <img alt="Made by tgmarinho" src="https://img.shields.io/badge/%20Fonte%20-Google Fonts-%2304D361">
