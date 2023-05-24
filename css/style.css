@@ -77,7 +77,6 @@ input[type="text"]:focus {
 }
 
 .btn-img {
-  position: relative;
   background-color: var(--Purple);
   width: 80px;
   height: 80px;
@@ -100,4 +99,22 @@ input[type="text"]:focus {
 
 .result-text span {
   color: var(--Purple);
+}
+
+@media only screen and (max-width: 600px) and (min-width: 400px) {
+  .content {
+    padding: 30px;
+  }
+  .btn-line {
+    width: 400px;
+  }
+  .btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-block: 60px;
+  }
+  .btn-img {
+    position: absolute;
+  }
 }
