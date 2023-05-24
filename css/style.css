@@ -103,7 +103,7 @@ input[type="text"]:focus {
 
 @media only screen and (max-width: 550px) {
   .content {
-    padding: 30px;
+    padding: 20px;
   }
   .btn-line {
     width: 400px;
